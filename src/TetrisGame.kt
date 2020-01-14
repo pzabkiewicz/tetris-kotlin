@@ -2,7 +2,6 @@ import controller.Game
 import model.Tetrion
 import model.TetrionCellState
 import model.tetromino.Tetromino
-import model.tetromino.TetrominoType
 import java.util.*
 
 /**

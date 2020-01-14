@@ -33,7 +33,7 @@ class Tetromino(val tetrominoType: TetrominoType) {
     fun moveLeft(tetrion: Tetrion) = move(MoveDirection.LEFT, tetrion)
 
     fun turn(tetrion: Tetrion) {
-        val turnControl = TurnControl.getInstance(tetrominoType)
+        val turnControl = TurnControl(tetrominoType)
         turnControl.performTurn(turnCounter, this, tetrion)
         turnCounter = turnCounter.inc().rem(4)
     }
