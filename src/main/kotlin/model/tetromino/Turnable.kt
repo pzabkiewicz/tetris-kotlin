@@ -16,7 +16,7 @@ abstract class Turnable {
 
     protected abstract val turnDirSigns: MutableList<Pair<Int, Int>>
 
-    abstract fun execute(turnCounter: Int, oldPosition: List<Pair<Int, Int>>, newPosition: MutableList<Pair<Int, Int>>)
+    abstract fun execute(turnCounter: Int, oldPosition: List<Pair<Int, Int>>): MutableList<Pair<Int, Int>>
 }
 
 class ZTurnable : Turnable() {
@@ -30,10 +30,10 @@ class ZTurnable : Turnable() {
 
     override fun execute(
         turnCounter: Int,
-        oldPosition: List<Pair<Int, Int>>,
-        newPosition: MutableList<Pair<Int, Int>>
-    ) {
+        oldPosition: List<Pair<Int, Int>>
+    ): MutableList<Pair<Int, Int>> {
 
+        val newPosition = mutableListOf<Pair<Int, Int>>()
         for (i in oldPosition.indices) {
             val signs = turnDirSigns[i.times(4).plus(turnCounter)]
             newPosition.add(
@@ -41,7 +41,7 @@ class ZTurnable : Turnable() {
                 (oldPosition[i].first + signs.first) to (oldPosition[i].second + signs.second)
             )
         }
-
+        return newPosition
     }
 }
 
@@ -55,10 +55,10 @@ class STurnable : Turnable() {
 
     override fun execute(
         turnCounter: Int,
-        oldPosition: List<Pair<Int, Int>>,
-        newPosition: MutableList<Pair<Int, Int>>
-    ) {
+        oldPosition: List<Pair<Int, Int>>
+    ): MutableList<Pair<Int, Int>> {
 
+        val newPosition = mutableListOf<Pair<Int, Int>>()
         for (i in oldPosition.indices) {
             if (i == 3) {
                 newPosition.add(i, oldPosition[i].copy())
@@ -71,7 +71,7 @@ class STurnable : Turnable() {
                 (oldPosition[i].first + signs.first) to (oldPosition[i].second + signs.second)
             )
         }
-
+        return newPosition
     }
 }
 
@@ -84,10 +84,10 @@ class JTurnable : Turnable() {
 
     override fun execute(
         turnCounter: Int,
-        oldPosition: List<Pair<Int, Int>>,
-        newPosition: MutableList<Pair<Int, Int>>
-    ) {
+        oldPosition: List<Pair<Int, Int>>
+    ): MutableList<Pair<Int, Int>> {
 
+        val newPosition = mutableListOf<Pair<Int, Int>>()
         for (i in oldPosition.indices) {
             if (i == 1) {
                 newPosition.add(i, oldPosition[i].copy())
@@ -105,7 +105,7 @@ class JTurnable : Turnable() {
                 (oldPosition[i].first + signs.first) to (oldPosition[i].second + signs.second)
             )
         }
-
+        return newPosition
     }
 }
 
@@ -118,10 +118,10 @@ class LTurnable : Turnable() {
 
     override fun execute(
         turnCounter: Int,
-        oldPosition: List<Pair<Int, Int>>,
-        newPosition: MutableList<Pair<Int, Int>>
-    ) {
+        oldPosition: List<Pair<Int, Int>>
+    ): MutableList<Pair<Int, Int>> {
 
+        val newPosition = mutableListOf<Pair<Int, Int>>()
         for (i in oldPosition.indices) {
             if (i == 1) {
                 newPosition.add(i, oldPosition[i].copy())
@@ -135,7 +135,7 @@ class LTurnable : Turnable() {
                 (oldPosition[i].first + signs.first) to (oldPosition[i].second + signs.second)
             )
         }
-
+        return newPosition
     }
 }
 
@@ -145,10 +145,12 @@ class OTurnable : Turnable() {
 
     override fun execute(
         turnCounter: Int,
-        oldPosition: List<Pair<Int, Int>>,
-        newPosition: MutableList<Pair<Int, Int>>
-    ) {
+        oldPosition: List<Pair<Int, Int>>
+    ): MutableList<Pair<Int, Int>> {
+
+        val newPosition = mutableListOf<Pair<Int, Int>>()
         oldPosition.forEach { newPosition.add(it) }
+        return newPosition
     }
 }
 
@@ -158,10 +160,10 @@ class TTurnable : Turnable() {
 
     override fun execute(
         turnCounter: Int,
-        oldPosition: List<Pair<Int, Int>>,
-        newPosition: MutableList<Pair<Int, Int>>
-    ) {
+        oldPosition: List<Pair<Int, Int>>
+    ): MutableList<Pair<Int, Int>> {
 
+        val newPosition = mutableListOf<Pair<Int, Int>>()
         for (i in oldPosition.indices) {
             if (i == 1) {
                 newPosition.add(i, oldPosition[i].copy())
@@ -175,6 +177,7 @@ class TTurnable : Turnable() {
             )
 
         }
+        return newPosition
     }
 }
 
@@ -189,10 +192,10 @@ class ITurnable : Turnable() {
 
     override fun execute(
         turnCounter: Int,
-        oldPosition: List<Pair<Int, Int>>,
-        newPosition: MutableList<Pair<Int, Int>>
-    ) {
+        oldPosition: List<Pair<Int, Int>>
+    ): MutableList<Pair<Int, Int>> {
 
+        val newPosition = mutableListOf<Pair<Int, Int>>()
         for (i in oldPosition.indices) {
             val idx = when (i) {
                 0 -> i.plus(turnCounter)
@@ -205,6 +208,6 @@ class ITurnable : Turnable() {
                 (oldPosition[i].first + signs.first) to (oldPosition[i].second + signs.second)
             )
         }
-
+        return newPosition
     }
 }

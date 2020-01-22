@@ -118,7 +118,7 @@ cmake-build-*/
 *.iws
 
 # IntelliJ
-out/
+../../tetris/out/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/

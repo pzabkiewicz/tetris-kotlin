@@ -4,20 +4,6 @@ import model.TetrionCellState
 import model.tetromino.Tetromino
 import java.util.*
 
-/**
- * Rules:
- * 1. Ruch
- *  a) pierwszy ruch:
- *      - mozliwy?
- *        :Y -> wykonaj kolejny ruch
- *        :N -> koniec gry
- *  b) normalny ruch:
- *      - ...
- * 2. Obrot
- * - Przed obrotem sprawdz czy mozliwe
- *   :Y -> Obroc, :N -> nie rob nic
- */
-
 fun main() {
 
     val board = Tetrion()
@@ -26,7 +12,7 @@ fun main() {
     val input = Scanner(System.`in`)
     while (true) {
         tetromino = Game.generateTetromino()
-        board.updateBoard(tetromino.tetrominoPosition, TetrionCellState.MOVING_TETROMINO)
+        board.updateBoard(tetromino.position, TetrionCellState.MOVING_TETROMINO)
         board.printBoard()
 
         val options = """OPTIONS:
@@ -45,6 +31,8 @@ fun main() {
         val options = """OPTIONS:
             |R - move right
             |L - move left
+            |U - move up
+            |D - move down
             |T - turn
             |C - continue
         """.trimMargin()
@@ -53,6 +41,8 @@ fun main() {
         when (input.next()) {
             "R" -> tetromino.moveRight(board)
             "L" -> tetromino.moveLeft(board)
+            "U" -> tetromino.moveUp(board)
+            "D" -> tetromino.moveDown(board)
             "T" -> tetromino.turn(board)
             "C" -> break@loop
             else -> println("Such option doesn't exist.")
@@ -63,8 +53,11 @@ fun main() {
 
 }
 
-enum class MoveDirection(val numVal: Int) {
-    RIGHT(1), LEFT(-1)
+enum class MoveDirection(val horizontalNumVal: Int, val verticalNumVal: Int) {
+    RIGHT(1, 0),
+    LEFT(-1, 0),
+    UP(0, -1),
+    DOWN(0, 1)
 }
 
 

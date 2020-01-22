@@ -4,24 +4,30 @@ import model.tetromino.Tetromino
 
 class Tetrion {
 
-    val board: List<MutableList<TetrionCellState>> = (1..24).asIterable()
+    val board: List<MutableList<TetrionCellState>> = (1..(HEIGHT)).asIterable()
         .map {
-            (1..10).asIterable().map { TetrionCellState.EMPTY }.toMutableList()
+            (1..WIDTH).asIterable().map { TetrionCellState.EMPTY }.toMutableList()
         }.toList()
+
+    companion object {
+        const val HEIGHT = 24
+        const val WIDTH = 10
+        const val TOP_MARGIN_HEIGHT = 4
+    }
 
     fun updateBoard(fieldsForUpdate: List<Pair<Int, Int>>, value: TetrionCellState) {
         for (tetrominoBlock in fieldsForUpdate) {
-            val row = board[tetrominoBlock.second + 4]
+            val row = board[tetrominoBlock.second + TOP_MARGIN_HEIGHT]
             row[tetrominoBlock.first] = value
         }
     }
 
     fun setNewTetrominoPosition(tetromino: Tetromino) {
-        updateBoard(tetromino.tetrominoPosition, TetrionCellState.MOVING_TETROMINO)
+        updateBoard(tetromino.position, TetrionCellState.MOVING_TETROMINO)
     }
 
     fun eraseOldTetrominoPosition(tetromino: Tetromino) {
-        updateBoard(tetromino.tetrominoPosition, TetrionCellState.EMPTY)
+        updateBoard(tetromino.position, TetrionCellState.EMPTY)
     }
 
     fun printBoard() {
