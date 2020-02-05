@@ -35,7 +35,6 @@ abstract class Rule {
     abstract val behaviour: (tetromino: Tetromino, tetrion: Tetrion) -> Unit
 
     companion object {
-        // TODO: The numbers shouldn't be hardcoded. Move to constants
         val isBlockBehindLeftMargin: (Pair<Int, Int>) -> Boolean =
             { blockNewPos -> blockNewPos.first < 0 }
 
